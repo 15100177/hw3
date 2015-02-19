@@ -12,11 +12,11 @@ class MoviesController < ApplicationController
     # if rating boxes are checked get the list of checked ratings
      session[:ratings] = params[:ratings] if !params[:ratings].nil?
      if session[:ratings]
-        @applicable_ratings = session[:ratings].keys
+        @ratings = session[:ratings].keys
 
         new_movie_list = Array.new
          @movies.each do |movie|
-            if (@applicable_ratings.include? movie[:rating])
+            if (@ratings.include? movie[:rating])
                new_movie_list.push movie
             
            end
