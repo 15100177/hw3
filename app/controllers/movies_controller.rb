@@ -24,8 +24,7 @@ class MoviesController < ApplicationController
          @movies = new_movie_list
       end
 
-      params[:utf8] = nil
-      params[:commit] = nil
+
 
 
 
