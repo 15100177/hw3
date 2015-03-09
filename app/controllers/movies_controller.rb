@@ -4,11 +4,34 @@ class MoviesController < ApplicationController
   def index
 
 
-    @all_ratings = ['G','PG','PG-13','R']
-
+     @all_ratings = ['G','PG','PG-13','R']
     @sortby = params[:sort]
     @movies = Movie.order(params[:sort])
-    #@movies = Movie.order("#{params[:sort_param]} ASC")
+    
+     
+    # if rating boxes are checked get the list of checked ratings
+     session[:ratings] = params[:ratings] if !params[:ratings].nil?
+     if session[:ratings]
+        @applicable_ratings = session[:ratings].keys
+
+        new_movie_list = Array.new
+         @movies.each do |movie|
+            if (@applicable_ratings.include? movie[:rating])
+               new_movie_list.push movie
+            
+           end
+        end
+         @movies = new_movie_list
+      end
+
+      params[:utf8] = nil
+      params[:commit] = nil
+
+
+
+
+
+
   end
 
  
